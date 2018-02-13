@@ -5,10 +5,8 @@
  */
 package spring.DAO;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
-import spring.model.Clientes;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,7 @@ import spring.model.Clientes;
 public class ClientesDAOImpl implements ClientesDao {
     
    
-  
+    @Autowired
     private SessionFactory sessionFactory;
     /**
      * Método para añadir un nuevo registro
@@ -51,7 +49,8 @@ public class ClientesDAOImpl implements ClientesDao {
     @Override
     public List<Clientes> listClientes() {
        @SuppressWarnings("unchecked") 
-       TypedQuery<Clientes> query =sessionFactory.getCurrentSession().createQuery("from carta");
+       TypedQuery<Clientes> query =sessionFactory.
+               getCurrentSession().createQuery("from Clientes");
        return query.getResultList();
     }
     /**

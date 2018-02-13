@@ -29,7 +29,7 @@ public class Clientes implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="idclientes")
-    private long idclientes;
+    private int idclientes;
     
     @Column(name="email")
     private String email;
@@ -72,7 +72,7 @@ public class Clientes implements Serializable{
         return idclientes;
     }
 
-    public void setIdclientes(long idclientes) {
+    public void setIdclientes(int idclientes) {
         this.idclientes = idclientes;
     }
 

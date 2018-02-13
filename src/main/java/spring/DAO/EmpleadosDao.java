@@ -20,6 +20,6 @@ public interface EmpleadosDao {
 	public List<Empleados> listEmpleados();
 	public Empleados getEmpleadosById(int id);
 	public void removeEmpleados(int id);
-        public Empleados LoginEmpleado(String login,String paswd);
+       
         
 }

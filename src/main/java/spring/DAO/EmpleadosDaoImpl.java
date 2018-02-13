@@ -38,7 +38,7 @@ public class EmpleadosDaoImpl implements EmpleadosDao {
      */
     @Override
     public void addEmpleados(Empleados c) {
-       
+       System.out.println("entra en addempleados");
       sessionFactory.getCurrentSession().save(c);
       
     }
@@ -59,7 +59,7 @@ public class EmpleadosDaoImpl implements EmpleadosDao {
     public List<Empleados> listEmpleados() {
        @SuppressWarnings("unchecked") 
        TypedQuery<Empleados> query =
-               sessionFactory.getCurrentSession().createQuery("from empleados");
+               sessionFactory.getCurrentSession().createQuery("from Empleados");
        return query.getResultList();
     }
     /**
@@ -80,34 +80,15 @@ public class EmpleadosDaoImpl implements EmpleadosDao {
     public void removeEmpleados(int id) {
        
        Session sesion =sessionFactory.getCurrentSession();
-       Empleados c = sesion.load(Empleados.class, id);
+       Empleados c = sesion.get(Empleados.class, id);
+       System.out.println(c.toString());
        if(c != null){
+         System.out.println("Entra en removeEmpleados dentro del if");
            sesion.remove(c);
        }
     }
 
-    @Override
-    public Empleados LoginEmpleado(String login, String paswd) {
-        
-     Session s = sessionFactory.getCurrentSession();
-      String hql="from spring.model.Empleados e where e.login=? and e.paswd=?";
-      Empleados c=null;
-        try {
-            s.beginTransaction();
-            Query query=s.createQuery(hql);
-            query.setParameter(0, login);
-            query.setParameter(1, paswd);
-            
-            c =(Empleados) query.uniqueResult();
-            s.getTransaction().commit();
-            s.close();
-        } catch (Exception e) {
-            s.getTransaction().rollback();
-            s.close();
-            e.printStackTrace();
-        }
-        return c;
-    }
+   
 
     
 }

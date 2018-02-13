@@ -23,8 +23,14 @@ import spring.model.Menu;
 public class MenuDAOImpl implements MenuDao {
     
    
-  
+    @Autowired
     private SessionFactory sessionFactory;
+
+  public void setSessionFactory(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
+  }
+    
+    
     /**
      * Método para añadir un nuevo registro
      * @param c  Recibe un objeto de tipo Menu.
@@ -51,7 +57,8 @@ public class MenuDAOImpl implements MenuDao {
     @Override
     public List<Menu> listMenus() {
        @SuppressWarnings("unchecked") 
-       TypedQuery<Menu> query =sessionFactory.getCurrentSession().createQuery("from menu");
+       TypedQuery<Menu> query =sessionFactory.getCurrentSession()
+               .createQuery("from Menu");
        return query.getResultList();
     }
     /**

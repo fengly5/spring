@@ -23,7 +23,7 @@ import spring.model.Dispositivos;
 public class DispositivosDAOImpl implements DispositivosDao {
     
    
-   
+    @Autowired
     private SessionFactory sessionFactory;
     /**
      * Método para añadir un nuevo registro
@@ -52,7 +52,7 @@ public class DispositivosDAOImpl implements DispositivosDao {
     public List<Dispositivos> listDispositivos() {
        @SuppressWarnings("unchecked") 
        TypedQuery<Dispositivos> query =
-            sessionFactory.getCurrentSession().createQuery("from dispositivos");
+            sessionFactory.getCurrentSession().createQuery("from Dispositivos");
        return query.getResultList();
     }
     /**

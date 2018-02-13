@@ -28,7 +28,7 @@ public class Empleados implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="idempleados")
-    private long idempleados;
+    private int idempleados;
     @Column(name="login")
     private String login;
     @Column(name="paswd")
@@ -39,7 +39,7 @@ public class Empleados implements Serializable{
     @JoinColumn(name="usuarios_idusuarios")
     private Usuarios usuarios;
     
-    @OneToMany(mappedBy="empleados",cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="empleados",cascade = { CascadeType.MERGE,CascadeType.PERSIST})
     private Set<Platos> platos;
     
     public Empleados() {
@@ -67,7 +67,7 @@ public class Empleados implements Serializable{
         return idempleados;
     }
 
-    public void setIdempleados(long idempleados) {
+    public void setIdempleados(int idempleados) {
         this.idempleados = idempleados;
     }
 

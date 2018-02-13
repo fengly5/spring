@@ -5,12 +5,15 @@
  */
 package spring.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import spring.DAO.EmpleadosDao;
 import java.util.List;
 import spring.model.Empleados;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -56,10 +59,18 @@ public class EmpleadosServiceImpl implements EmpleadosService {
         this.empleado.removeEmpleados(id);
     }
 
-    @Override
-    @Transactional
+    
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Empleados LoginEmpleado(String login, String paswd) {
+        List<Empleados> lst;
+        Empleados result = null;
+        lst = this.empleado.listEmpleados();
         
-        return this.empleado.LoginEmpleado(login,paswd);
+      for (Empleados e :lst) {
+        if (e.getLogin().equals(login) && e.getPaswd().equals(paswd)){
+          result = e;
+        }
+      }
+        return result;
     }
 }

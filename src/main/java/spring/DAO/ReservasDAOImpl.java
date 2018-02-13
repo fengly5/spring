@@ -16,6 +16,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import spring.model.Empleados;
 import spring.model.Reservas;
 
 /**
@@ -60,14 +61,10 @@ public class ReservasDAOImpl implements ReservasDao {
     @Override
     public List<Reservas> listReservas() {
        @SuppressWarnings("unchecked") 
-       Session s = sessionFactory.getCurrentSession();
-       Transaction tx = s.getTransaction();
-       tx.begin();
-       Query q=s.createQuery("from Reservas");
-       List<Reservas> result = q.getResultList();
-       tx.commit();
-       s.close();
-       return result;
+       TypedQuery<Reservas> query;
+      query = sessionFactory.getCurrentSession().createQuery("from Reservas");
+       return query.getResultList();
+       
     }
     /**
      * Método para obtener un registro de la tabla reservas por su Id

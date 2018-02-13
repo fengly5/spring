@@ -9,6 +9,7 @@ import spring.DAO.ReservasDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import spring.model.Reservas;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,7 +37,7 @@ public class ReservasServiceImpl implements ReservasService{
     }
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public List<Reservas> listReservas() {
         return this.reserva.listReservas();
     }

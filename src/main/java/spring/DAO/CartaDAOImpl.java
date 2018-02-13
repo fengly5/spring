@@ -22,7 +22,7 @@ import org.springframework.stereotype.Repository;
 public class CartaDAOImpl implements CartaDao {
     
    
-    
+    @Autowired
     private SessionFactory sessionFactory;
    
     public void setSessionFactory(SessionFactory sesion){
@@ -54,7 +54,7 @@ public class CartaDAOImpl implements CartaDao {
     @Override
     public List<Carta> listCartas() {
        @SuppressWarnings("unchecked") 
-       TypedQuery<Carta> query =sessionFactory.getCurrentSession().createQuery("from carta");
+       TypedQuery<Carta> query =sessionFactory.getCurrentSession().createQuery("from Carta");
        return query.getResultList();
     }
     /**

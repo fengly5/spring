@@ -44,7 +44,8 @@ spring.config.WebConfig.class , spring.config.RootConfig.class})
 public class EmpleadosServiceImplTest {
   
   //preparamos un logger para dedug
-  private static final Logger LOG = Logger.getLogger(EmpleadosServiceImplTest.class, "TEST-EmpleadosService");
+  private static final Logger LOG = Logger.
+          getLogger(EmpleadosServiceImplTest.class, "TEST-EmpleadosService");
   
   public EmpleadosServiceImplTest() {
   }
@@ -149,6 +150,23 @@ public class EmpleadosServiceImplTest {
       }
       
     });
+    
+    //comportamiento para removeEmpleados()
+    
+    doAnswer(new Answer() {
+      @Override
+      public Object answer(InvocationOnMock iom) throws Throwable {
+        Object[] arguments = iom.getArguments();
+        
+        if (arguments != null && arguments.length == 1 && arguments[0] != null){
+          int id = (int) arguments[0];
+          t.remove(id-1);
+        }
+        return null;
+      }
+    }).when(empleadosDao).removeEmpleados(any(Integer.class));
+    
+            
   }
   
   @After
@@ -231,11 +249,12 @@ public class EmpleadosServiceImplTest {
   @Test
   public void testRemoveEmpleados() {
     System.out.println("removeEmpleados");
-    int id = 0;
-    EmpleadosServiceImpl instance = new EmpleadosServiceImpl();
-    instance.removeEmpleados(id);
-    // TODO review the generated test code and remove the default call to fail.
-    fail("The test case is a prototype.");
+    int id = 1;
+    
+    empleadosDao.removeEmpleados(id);
+    assertEquals("empleado eliminado", 0, empleadosDao.listEmpleados().size());
+    
+    
   }
 
   /**
@@ -244,14 +263,13 @@ public class EmpleadosServiceImplTest {
   @Test
   public void testLoginEmpleado() {
     System.out.println("LoginEmpleado");
-    String login = "";
-    String paswd = "";
-    EmpleadosServiceImpl instance = new EmpleadosServiceImpl();
-    Empleados expResult = null;
-    Empleados result = instance.LoginEmpleado(login, paswd);
-    assertEquals(expResult, result);
-    // TODO review the generated test code and remove the default call to fail.
-    fail("The test case is a prototype.");
+    Empleados e = empleadosService.LoginEmpleado("admin", "juank");
+    LOG.info(e.toString());
+    String loginEsperado="admin";
+    String paswdEsperado="juank";
+    assertEquals("login correcto", loginEsperado, e.getLogin());
+    assertEquals("paswd correcto", paswdEsperado, e.getPaswd());
+    
   }
   
 }
