@@ -30,10 +30,12 @@
 			<div class="form-group">
 		         <label for="empleado">Login</label>
                          <form:input path="login" />
+                         <form:errors path="login"/>
 			</div>
 			<div class="form-group">
 			 <label for="paswd">Password</label>
 			 <form:password path="paswd"/>
+                         <form:errors path="paswd"/>
 			</div>
   			<button type="submit" class="btn btn-primary">Entrar</button>
          	    </form:form>

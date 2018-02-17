@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+    <Configuration status="WARN">
+      <Appenders>
+     <!-- Console Appender -->
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+    </Console>
+
+    <!-- File Appender -->
+    <File name="File" fileName="c:/log/app.log">
+      <PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+    </File>
+      </Appenders>
+      <Loggers>
+        <Root level="error">
+          <AppenderRef ref="Console"/>
+          <AppenderRef ref="File" />
+        </Root>
+        
+         <!-- Log everything in hibernate -->
+    <Logger name="org.hibernate" level="info" additivity="false">
+      <AppenderRef ref="Console" />
+    </Logger>
+
+    <!-- Log SQL statements -->
+    <Logger name="org.hibernate.SQL" level="debug" additivity="false">
+      <AppenderRef ref="Console" />
+      <AppenderRef ref="File" />
+    </Logger>
+
+    <!-- Log JDBC bind parameters -->
+    <Logger name="org.hibernate.type.descriptor.sql" level="trace" additivity="false">
+      
+      <AppenderRef ref="File" />
+    </Logger>
+
+ 
+    <Logger name="spring.DAO.Notif_sistemaDAOImplTest" level="debug" additivity="false">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="File"/>
+    </Logger>
+ 
+ <Logger name="spring.service" level="debug" additivity="false">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="File"/>
+    </Logger>
+    <Logger name="spring.model" level="debug" additivity="false">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="File"/>
+    </Logger>
+    <Logger name="spring.web" level="debug" additivity="false">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="File"/>
+    </Logger>
+      </Loggers>
+    </Configuration>

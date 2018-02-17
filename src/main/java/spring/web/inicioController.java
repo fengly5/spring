@@ -35,12 +35,13 @@ public class inicioController {
 private static final Logger LOG = 
         Logger.getLogger(inicioController.class.getName());
    
-//    private SessionFactory sessionFactory;
+
     @Autowired
     public ReservasService reservasService;
     
     @RequestMapping(value= "inicio", method = RequestMethod.GET)
-    public ModelAndView handleRequest(HttpServletRequest hsr, HttpServletResponse hsr1) throws Exception {
+    public ModelAndView handleRequest(HttpServletRequest hsr,
+            HttpServletResponse hsr1) throws Exception {
                LOG.info("entra en handledrequest");
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/inicio");
@@ -48,19 +49,5 @@ private static final Logger LOG =
         return mv;
     }
 
-//    private List<Reservas> listarReservas(){
-//        List<Reservas> result= new ArrayList<Reservas>();
-//        try {
-//                Session session =sessionFactory.getCurrentSession();
-//            session.beginTransaction();
-//            LOG.info("empieza transacción");
-//            result = session.createQuery("select distinct r from Reservas r join fetch r.cliente c join fetch c.usuarios").list();
-//            LOG.info(result.toString());
-//           
-//            session.getTransaction().commit();
-//          } catch (Exception e) {
-//              e.printStackTrace();
-//          }
-//        return result;
-//    }
+
 }

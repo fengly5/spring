@@ -32,7 +32,7 @@ public class Notificaciones implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idnotificaciones")
-    private int idnorificaciones;
+    private int idnotificaciones;
     
     @Column
     private String mensaje;
@@ -41,7 +41,7 @@ public class Notificaciones implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fecha;
     
-    @ManyToMany(cascade = {CascadeType.ALL},mappedBy="notificacion")
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},mappedBy="notificacion")
     private Set<Dispositivos> dispositivo=new HashSet();
 
     @OneToMany(mappedBy="notificacion", cascade=CascadeType.ALL)
@@ -61,12 +61,12 @@ public class Notificaciones implements Serializable {
         this.notif_sistema = notif_sistema;
     }
 
-    public int getIdnorificaciones() {
-        return idnorificaciones;
+    public int getIdnotificaciones() {
+        return idnotificaciones;
     }
 
-    public void setIdnorificaciones(int idnorificaciones) {
-        this.idnorificaciones = idnorificaciones;
+    public void setIdnotificaciones(int idnorificaciones) {
+        this.idnotificaciones = idnorificaciones;
     }
 
     public String getMensaje() {

@@ -13,7 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -33,16 +36,17 @@ public class Tipo_notif implements Serializable {
     @Column(name="tipo")
     private String tipo;
     
-    @OneToMany(mappedBy="tipo_notif", cascade=CascadeType.ALL)
-    private Set<Notif_sistema> notif_sistema;
+//    @OneToOne(cascade={CascadeType.MERGE,CascadeType.PERSIST})
+//    @PrimaryKeyJoinColumn
+//    private Notif_sistema notif_sistema;
 
     public Tipo_notif() {
     }
 
     
-    public Tipo_notif(String tipo, Set<Notif_sistema> notif_sistema) {
+    public Tipo_notif(String tipo, Notif_sistema notif_sistema) {
         this.tipo = tipo;
-        this.notif_sistema = notif_sistema;
+//        this.notif_sistema = notif_sistema;
     }
 
     public int getIdtipo_notif() {
@@ -61,13 +65,13 @@ public class Tipo_notif implements Serializable {
         this.tipo = tipo;
     }
 
-    public Set<Notif_sistema> getNotif_sistema() {
-        return notif_sistema;
-    }
-
-    public void setNotif_sistema(Set<Notif_sistema> notif_sistema) {
-        this.notif_sistema = notif_sistema;
-    }
-    
+//    public Notif_sistema getNotif_sistema() {
+//        return notif_sistema;
+//    }
+//
+//    public void setNotif_sistema(Notif_sistema notif_sistema) {
+//        this.notif_sistema = notif_sistema;
+//    }
+//    
     
 }

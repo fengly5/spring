@@ -23,7 +23,7 @@ import spring.model.Tipo_plato;
 public class Tipo_platoDAOImpl implements Tipo_platoDao {
     
    
-  
+    @Autowired
     private SessionFactory sessionFactory;
     /**
      * Método para añadir un nuevo registro
@@ -52,7 +52,7 @@ public class Tipo_platoDAOImpl implements Tipo_platoDao {
     public List<Tipo_plato> listTipo_platos() {
        @SuppressWarnings("unchecked") 
        TypedQuery<Tipo_plato> query =
-             sessionFactory.getCurrentSession().createQuery("from tipo_plato");
+             sessionFactory.getCurrentSession().createQuery("from Tipo_plato");
        return query.getResultList();
     }
     /**

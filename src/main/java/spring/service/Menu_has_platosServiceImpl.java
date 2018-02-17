@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import spring.model.Menu_has_platos;
 import org.springframework.transaction.annotation.Transactional;
+import spring.model.Menu_has_platosId;
 
 /**
  *
@@ -43,13 +44,13 @@ public class Menu_has_platosServiceImpl implements Menu_has_platosSerice{
 
     @Override
     @Transactional
-    public Menu_has_platos getMenu_has_platosById(int id) {
+    public Menu_has_platos getMenu_has_platosById(Menu_has_platosId id) {
         return this.menu_has_plato.getMenu_has_platosById(id);
     }
 
     @Override
     @Transactional
-    public void removeMenu_has_platos(int id) {
+    public void removeMenu_has_platos(Menu_has_platosId id) {
         this.menu_has_plato.removeMenu_has_platos(id);
     }
 }

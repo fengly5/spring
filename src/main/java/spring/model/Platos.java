@@ -51,20 +51,25 @@ public class Platos implements Serializable {
     private Empleados empleados;
    
     @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(name="platos_has_tipo_plato",joinColumns = {@JoinColumn(name="platos_idPlato")},inverseJoinColumns = {@JoinColumn(name="tipo_plato_idTipo")})
+    @JoinTable(name="platos_has_tipo_plato",
+            joinColumns = {@JoinColumn(name="platos_idPlato")},
+            inverseJoinColumns = {@JoinColumn(name="tipo_plato_idTipo")})
     private Set<Tipo_plato> tipo_plato=new HashSet();
         
     @OneToMany(mappedBy="primaryKey.plato",cascade=CascadeType.ALL)
-    private Set<Platos_has_carta> platos_has_carta = new HashSet<Platos_has_carta>();
+    private Set<Platos_has_carta> platos_has_carta = 
+            new HashSet<Platos_has_carta>();
     
     @OneToMany(mappedBy="primaryKey.plato",
             cascade=CascadeType.ALL)
-    private Set<Menu_has_platos> menu_has_platos = new HashSet<Menu_has_platos>();
+    private Set<Menu_has_platos> menu_has_platos =
+            new HashSet<Menu_has_platos>();
 
     public Platos() {
     }
 
-    public Platos(String nombre, double precioTapa, double precioMedia, double precioRacion, Empleados empleado) {
+    public Platos(String nombre, double precioTapa,
+            double precioMedia, double precioRacion, Empleados empleado) {
         this.nombre = nombre;
         this.precioTapa = precioTapa;
         this.precioMedia = precioMedia;

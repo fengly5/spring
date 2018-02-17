@@ -10,16 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.jboss.logging.Logger;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import static org.mockito.Mockito.doAnswer;
 import org.mockito.junit.MockitoJUnitRunner;
 import spring.DAO.EmpleadosDaoImpl;
@@ -29,9 +26,7 @@ import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *Clase de pruebas para el servicio EmpleadosServiceImpl
@@ -98,7 +93,8 @@ public class EmpleadosServiceImplTest {
         LOG.info("entra en answer");
        Object[] arguments = iom.getArguments(); 
        LOG.info("arguments: "+arguments.toString());
-       if (arguments != null && arguments.length == 1 && arguments[0] != null ) {
+       if (arguments != null && arguments.length == 1 && arguments[0] 
+               != null ) {
          
          Empleados empleado = (Empleados) arguments[0];
          LOG.info("doAnswer: "+ empleado.toString());

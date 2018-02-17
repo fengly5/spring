@@ -57,7 +57,7 @@ public class PlatosDAOImpl implements PlatosDao {
     public List<Platos> listPlatos() {
        @SuppressWarnings("unchecked") 
        TypedQuery<Platos> query =
-               sessionFactory.getCurrentSession().createQuery("from platos");
+               sessionFactory.getCurrentSession().createQuery("from Platos");
        return query.getResultList();
     }
     /**
@@ -80,7 +80,8 @@ public class PlatosDAOImpl implements PlatosDao {
        Session sesion =sessionFactory.getCurrentSession();
        Platos c = sesion.load(Platos.class, id);
        if(c != null){
-           sesion.remove(c);
+           sesion.delete(c);
+           sesion.flush();
        }
     }
 }

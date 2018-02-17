@@ -37,13 +37,10 @@ public class Reservas implements Serializable {
     @Column (name="turno")
     private String turno;
     
-    @Column(name="hora")
-    @Temporal(TemporalType.TIME)
-    private Date hora;
-    
-    @Column(name="fecha")
+
+    @Column(name="fechaHora")
     @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private Date fechaHora;
     
     @ManyToOne
     @JoinColumn(name="clientes_idclientes")
@@ -52,11 +49,12 @@ public class Reservas implements Serializable {
     public Reservas() {
     }
 
-    public Reservas(int nComensales, String turno, Date hora, Date fecha, Clientes cliente) {
+    public Reservas(int nComensales, String turno, 
+            Date fechaHora, Clientes cliente) {
         this.nComensales = nComensales;
         this.turno = turno;
-        this.hora = hora;
-        this.fecha = fecha;
+       
+        this.fechaHora = fechaHora;
         this.cliente = cliente;
     }
 
@@ -84,20 +82,14 @@ public class Reservas implements Serializable {
         this.turno = turno;
     }
 
-    public Date getHora() {
-        return hora;
+
+
+    public Date getFechaHora() {
+        return fechaHora;
     }
 
-    public void setHora(Date hora) {
-        this.hora = hora;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFechaHora(Date fecha) {
+        this.fechaHora = fecha;
     }
 
     public Clientes getCliente() {
@@ -110,7 +102,9 @@ public class Reservas implements Serializable {
 
     @Override
     public String toString() {
-        return "Reservas{" + "idreservas=" + idreservas + ", nComensales=" + nComensales + ", turno=" + turno + ", hora=" + hora + ", fecha=" + fecha + ", cliente=" + cliente + '}';
+        return "Reservas{" + "idreservas=" + idreservas + ", nComensales="
+                + nComensales + ", turno=" + turno + ", fecha=" +
+                fechaHora + ", cliente=" + cliente + '}';
     }
     
     

@@ -23,7 +23,7 @@ import spring.model.Notif_sistema;
 public class Notif_sistemaDAOImpl implements Notif_sistemaDao {
     
    
- 
+    @Autowired
     private SessionFactory sessionFactory;
     /**
      * Método para añadir un nuevo registro
@@ -75,7 +75,8 @@ public class Notif_sistemaDAOImpl implements Notif_sistemaDao {
        Session sesion =sessionFactory.getCurrentSession();
        Notif_sistema c = sesion.load(Notif_sistema.class, id);
        if(c != null){
-           sesion.remove(c);
+           sesion.delete(c);
+           sesion.flush();
        }
     }
 }

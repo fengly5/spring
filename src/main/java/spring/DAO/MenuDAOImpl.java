@@ -14,6 +14,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import spring.model.Menu;
+import spring.model.Menu_has_platosId;
 
 /**
  *
@@ -85,3 +86,4 @@ public class MenuDAOImpl implements MenuDao {
        }
     }
 }
+ 

@@ -8,6 +8,7 @@ package spring.model;
 import java.io.Serializable;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -22,19 +23,22 @@ import javax.persistence.Transient;
 @Table(name="platos_has_carta")
 @AssociationOverrides({
     @AssociationOverride(name = "primaryKey.carta",
-        joinColumns = @JoinColumn(name = "idcarta")),
+        joinColumns = @JoinColumn(name = "carta_idcarta")),
     @AssociationOverride(name = "primaryKey.plato",
-        joinColumns = @JoinColumn(name = "idPlato")) })
+        joinColumns = @JoinColumn(name = "platos_idPlato ")) })
 public class Platos_has_carta implements Serializable {
+    
+ 
     
    
     private Platos_has_cartaId primaryKey = new Platos_has_cartaId();
-    
-    private int aparece;
+       private int aparece;
+
      @EmbeddedId
     public Platos_has_cartaId getPrimaryKey(){
         return primaryKey;
     }
+    
     public void setPrimaryKey(Platos_has_cartaId primaryKey){
         this.primaryKey=primaryKey;
     }
@@ -60,7 +64,7 @@ public class Platos_has_carta implements Serializable {
 
     public Platos_has_carta() {
     }
-
+ @Column(name="aparece")
     public int getAparece() {
         return aparece;
     }

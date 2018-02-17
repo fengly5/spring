@@ -23,7 +23,7 @@ import spring.model.Tipo_notif;
 public class Tipo_notifDAOImpl implements Tipo_notifDao {
     
    
- 
+    @Autowired
     private SessionFactory sessionFactory;
     /**
      * Método para añadir un nuevo registro
@@ -52,7 +52,7 @@ public class Tipo_notifDAOImpl implements Tipo_notifDao {
     public List<Tipo_notif> listTipo_notifs() {
        @SuppressWarnings("unchecked") 
        TypedQuery<Tipo_notif> query =
-             sessionFactory.getCurrentSession().createQuery("from tipo_notif");
+             sessionFactory.getCurrentSession().createQuery("from Tipo_notif");
        return query.getResultList();
     }
     /**

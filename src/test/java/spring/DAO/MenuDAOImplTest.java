@@ -9,7 +9,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import static java.time.Instant.now;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,12 +43,16 @@ WebConfig.class , RootConfig.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MenuDAOImplTest {
   
+        private static final Logger LOG = Logger.
+    getLogger(ClientesDAOImplTest.class.getName());
+        
   @Autowired
   MenuDao menuDao;
   
   List<Menu> lst;
   
   Menu m;
+  Calendar calendar = new GregorianCalendar();
   
   
   public MenuDAOImplTest() {
@@ -89,44 +97,58 @@ public class MenuDAOImplTest {
     
     //modifico un menu
     Menu e = lst.get(0);
-    SimpleDateFormat sdf = new SimpleDateFormat();
-    
-    try {
-      Date fecha = sdf.parse("19/10/1972");
-              } catch (ParseException ex) {
-     
-    }
+    //Seteo una fecha   
+    calendar.set(1972,9,19);
+    Date fecha = calendar.getTime();
+    //pongo la nueva fecha en el menu   
     e.setFecha(fecha);
-    
+     
     //actualizo
     menuDao.updateMenu(e);
     
     //obtengo de nuevo la lista
     lst= menuDao.listMenus();
     Menu menuModificado=lst.get(0);
-    assertEquals(, clienteModificado.getEmail());
-    assertEquals("nuevoPas", clienteModificado.getPaswd());
+    //comparo si la fecha que creé es la que está en la bbdd
+    assertEquals(fecha,menuModificado.getFecha());
+    
   }
 
   /**
    * Test of listMenus method, of class MenuDAOImpl.
    */
   @Test
+  @Transactional
   public void testListMenus() {
+    assertNotNull(menuDao.listMenus());
   }
 
   /**
    * Test of getMenuById method, of class MenuDAOImpl.
    */
-  @Test
-  public void testGetMenuById() {
+    @Test
+  @Transactional
+  @Rollback(true)
+  public void testGetMenusById() {
+    Menu e = menuDao.getMenuById(1);
+    assertNotNull(e);
+    assertEquals(1, e.getIdmenu());
   }
 
   /**
    * Test of removeMenu method, of class MenuDAOImpl.
    */
-  @Test
-  public void testRemoveMenu() {
+    @Test
+  @Transactional
+  @Rollback(true)
+  public void testRemoveMenus() {
+    Menu e = null;
+    menuDao.removeMenu(1);
+   try {e=menuDao.getMenuById(1);
+  }catch(Exception ex)
+          {
+            assertNull(e);
+          }
   }
   
 }

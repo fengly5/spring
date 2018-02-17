@@ -23,7 +23,7 @@ import spring.model.Usuarios;
 public class UsuariosDAOImpl implements UsuariosDao {
     
    
-   
+    @Autowired
     private SessionFactory sessionFactory;
     /**
      * Método para añadir un nuevo registro
@@ -52,7 +52,7 @@ public class UsuariosDAOImpl implements UsuariosDao {
     public List<Usuarios> listUsuarios() {
        @SuppressWarnings("unchecked") 
        TypedQuery<Usuarios> query =
-               sessionFactory.getCurrentSession().createQuery("from usuarios");
+               sessionFactory.getCurrentSession().createQuery("from Usuarios");
        return query.getResultList();
     }
     /**

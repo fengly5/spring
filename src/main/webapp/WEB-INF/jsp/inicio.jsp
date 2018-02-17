@@ -81,7 +81,7 @@
                       <th scope="row">Id</th>
                     <th scope="row">ncomensales</th>
                     <th scope="row">turno</th>
-                    <th scope="row">hora</th>
+                   
                     <th scope="row">fecha</th>
                     <th scope="row">cliente</th>
                 </tr>
@@ -94,8 +94,8 @@
                         <th scope="row"><c:out value="${consulta.idreservas}"></c:out></th>
                         <td><c:out value="${consulta.nComensales}"></c:out></td>
                         <td><c:out value="${consulta.turno}"></c:out></td>
-                        <td><c:out value="${consulta.hora}"></c:out></td>
-                        <td><c:out value="${consulta.fecha}"></c:out></td>
+                        
+                        <td><c:out value="${consulta.fechaHora}"></c:out></td>
                         <td><c:out value="${consulta.cliente.email}"></c:out></td>
                         
                     </tr>

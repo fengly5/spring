@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import spring.DAO.EmpleadosDao;
 import java.util.List;
+import org.jboss.logging.Logger;
 import spring.model.Empleados;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmpleadosServiceImpl implements EmpleadosService {
      
          
-         
+     private static final Logger LOG = Logger.getLogger(EmpleadosServiceImpl.class);
     @Autowired  
     private EmpleadosDao empleado;
      
@@ -61,16 +62,18 @@ public class EmpleadosServiceImpl implements EmpleadosService {
 
     
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public Empleados LoginEmpleado(String login, String paswd) {
+    public Boolean LoginEmpleado(String login, String paswd)
+    {
         List<Empleados> lst;
-        Empleados result = null;
+        Boolean result = false;
         lst = this.empleado.listEmpleados();
         
       for (Empleados e :lst) {
         if (e.getLogin().equals(login) && e.getPaswd().equals(paswd)){
-          result = e;
+          result = true;
         }
       }
+        LOG.info("result: "+result);
         return result;
     }
 }

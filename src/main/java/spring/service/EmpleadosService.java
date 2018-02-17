@@ -18,5 +18,5 @@ public interface EmpleadosService {
 	public List<Empleados> listEmpleados();
 	public Empleados getEmpleadosById(int id);
 	public void removeEmpleados(int id);
-        public Empleados LoginEmpleado(String login, String paswd);
+        public Boolean LoginEmpleado(String login, String paswd);
 }

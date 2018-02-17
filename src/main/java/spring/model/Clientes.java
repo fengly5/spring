@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -31,8 +32,10 @@ public class Clientes implements Serializable{
     @Column(name="idclientes")
     private int idclientes;
     
+   // @Pattern(regexp = "^[\\w-_\\.+]*[\\w-_\\.]\\ @([\\w]+\\.)+[\\w]+[\\w]$")
     @Column(name="email")
     private String email;
+    
     
     @Column(name="paswd")
     private String paswd;

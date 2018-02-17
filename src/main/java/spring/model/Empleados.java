@@ -17,6 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -30,8 +35,11 @@ public class Empleados implements Serializable{
     @Column(name="idempleados")
     private int idempleados;
     @Column(name="login")
+    @Min(value=2 ,message="{empleado.login.vacio}")
     private String login;
     @Column(name="paswd")
+    @NotEmpty(message="{empleado.pass.vacio}")
+    @Max(value=8, message="La contraseña no puede ser de más de 8 caracteres.")
     private String paswd;
     @Column(name="rol")
     private String rol;

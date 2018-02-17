@@ -7,12 +7,15 @@ package spring.DAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.persistence.TypedQuery;
+import org.hibernate.HibernateException;
 import spring.model.Notificaciones;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import spring.model.Notificaciones;
 
 /**
@@ -21,9 +24,10 @@ import spring.model.Notificaciones;
  */
 @Repository
 public class NotificacionesDAOImpl implements NotificacionesDao {
-    
+        private static final Logger LOG = Logger.
+    getLogger(NotificacionesDAOImpl.class.getName());
    
-    
+    @Autowired
     private SessionFactory sessionFactory;
     /**
      * Método para añadir un nuevo registro
@@ -52,7 +56,7 @@ public class NotificacionesDAOImpl implements NotificacionesDao {
     public List<Notificaciones> listNotificaciones() {
        @SuppressWarnings("unchecked") 
        TypedQuery<Notificaciones> query =
-         sessionFactory.getCurrentSession().createQuery("from notificaciones");
+         sessionFactory.getCurrentSession().createQuery("from Notificaciones");
        return query.getResultList();
     }
     /**
@@ -62,20 +66,30 @@ public class NotificacionesDAOImpl implements NotificacionesDao {
      */
     @Override
     public Notificaciones getNotificacionesById(int id) {
-            
-       return sessionFactory.getCurrentSession().load(Notificaciones.class, id);
+           Notificaciones n=null;
+           try {
+             n = sessionFactory.getCurrentSession().load(Notificaciones.class, id);
+      } catch (HibernateException e) {
+        return null;
+      }
+           
+       return n;
     }
     /**
      * Método para borrar un registro de la tabla notificaciones por su id.
      * @param id Recibe un entero con el id del registro a borrar
      */
     @Override
+    @Transactional
     public void removeNotificaciones(int id) {
        
        Session sesion =sessionFactory.getCurrentSession();
        Notificaciones c = sesion.load(Notificaciones.class, id);
+       LOG.info("c: "+c.getMensaje());
        if(c != null){
+         LOG.info("entra if");
            sesion.remove(c);
+          sesion.flush();
        }
     }
 }

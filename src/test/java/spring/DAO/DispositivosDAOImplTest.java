@@ -154,6 +154,7 @@ public class DispositivosDAOImplTest {
         Dispositivos e = null;
     dispositivosDao.removeDispositivos(1);
    try {e=dispositivosDao.getDispositivosById(1);
+        System.out.println("spring.DAO.DispositivosDAOImplTest.testRemoveDispositivos()"+ e.getIddispositivos());
   }catch(Exception ex)
           {
             assertNull(e);

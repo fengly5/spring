@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -147,7 +148,10 @@ public class EmpleadosDaoImplTest {
   public void testRemoveEmpleados() {
     Empleados e = null;
     empleadosDao.removeEmpleados(1);
-   try {e=empleadosDao.getEmpleadosById(1);
+   try {
+     e=empleadosDao.getEmpleadosById(1);
+     System.out.println("spring.DAO.EmpleadosDaoImplTest.testRemoveEmpleados()"+e.toString());
+     fail("test falla");
   }catch(Exception ex)
           {
             Assert.assertNull(e);

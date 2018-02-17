@@ -13,6 +13,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import spring.model.Menu_has_platos;
+import spring.model.Menu_has_platosId;
 
 /**
  *
@@ -22,7 +23,7 @@ import spring.model.Menu_has_platos;
 public class Menu_has_platosDAOImpl implements Menu_has_platosDao {
     
    
-  
+    @Autowired
     private SessionFactory sessionFactory;
     /**
      * Método para añadir un nuevo registro
@@ -51,7 +52,8 @@ public class Menu_has_platosDAOImpl implements Menu_has_platosDao {
     public List<Menu_has_platos> listMenu_has_platos() {
        @SuppressWarnings("unchecked") 
        TypedQuery<Menu_has_platos> query =
-               sessionFactory.getCurrentSession().createQuery("from menu_has_platos");
+               sessionFactory.getCurrentSession()
+                       .createQuery("from Menu_has_platos");
        return query.getResultList();
     }
     /**
@@ -60,7 +62,7 @@ public class Menu_has_platosDAOImpl implements Menu_has_platosDao {
      * @return Devuelve un objeto Menu_has_platos.
      */
     @Override
-    public Menu_has_platos getMenu_has_platosById(int id) {
+    public Menu_has_platos getMenu_has_platosById(Menu_has_platosId id) {
             
       return sessionFactory.getCurrentSession().load(Menu_has_platos.class, id);
     }
@@ -69,7 +71,7 @@ public class Menu_has_platosDAOImpl implements Menu_has_platosDao {
      * @param id Recibe un entero con el id del registro a borrar
      */
     @Override
-    public void removeMenu_has_platos(int id) {
+    public void removeMenu_has_platos(Menu_has_platosId id) {
        
        Session sesion =sessionFactory.getCurrentSession();
        Menu_has_platos c = sesion.load(Menu_has_platos.class, id);
