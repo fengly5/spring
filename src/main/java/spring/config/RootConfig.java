@@ -5,10 +5,18 @@
  */
 package spring.config;
 
+import java.util.Properties;
+import javax.sql.DataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.core.env.Environment;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
@@ -17,9 +25,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  */
 @Configuration
 //@ComponentScan(
-//        basePackages={"spring"}, 
-//        excludeFilters={@Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)}
+//        basePackages={"spring"}
+//       
 //)
 public class RootConfig {
-    
+  
+ 
+
 }

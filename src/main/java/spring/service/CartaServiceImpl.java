@@ -8,6 +8,7 @@ package spring.service;
 import spring.DAO.CartaDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.model.Carta;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author jcpm0
  */
+@Service
 public class CartaServiceImpl implements CartaService{
     
     @Autowired
@@ -52,5 +54,11 @@ public class CartaServiceImpl implements CartaService{
     public void removeCarta(int id) {
         this.carta.removeCarta(id);
     }
+
+  @Override
+  @Transactional
+  public List<Carta> listCartas(Integer offset, Integer maxResults) {
+    return this.carta.listCartas(offset, maxResults);
+  }
     
 }

@@ -32,7 +32,7 @@ public class Menu_has_platosDAOImpl implements Menu_has_platosDao {
     @Override
     public void addMenu_has_platos(Menu_has_platos c) {
        
-      sessionFactory.getCurrentSession().save(c);
+      sessionFactory.getCurrentSession().merge(c);
       
     }
     

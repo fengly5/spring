@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import spring.model.Tipo_plato;
 
 /**
@@ -50,7 +51,8 @@ public class Tipo_platoDAOImpl implements Tipo_platoDao {
      */
     @Override
     public List<Tipo_plato> listTipo_platos() {
-       @SuppressWarnings("unchecked") 
+       
+       @SuppressWarnings("unchecked")            
        TypedQuery<Tipo_plato> query =
              sessionFactory.getCurrentSession().createQuery("from Tipo_plato");
        return query.getResultList();

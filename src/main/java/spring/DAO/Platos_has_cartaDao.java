@@ -7,6 +7,7 @@ package spring.DAO;
 
 import java.util.List;
 import spring.model.Platos_has_carta;
+import spring.model.Platos_has_cartaId;
 
 /**
  *
@@ -16,6 +17,6 @@ public interface Platos_has_cartaDao {
   public void addPlatos_has_carta(Platos_has_carta c);
 	public void updatePlatos_has_carta(Platos_has_carta c);
 	public List<Platos_has_carta> listPlatos_has_cartas();
-	public Platos_has_carta getPlatos_has_cartaById(int id);
-	public void removePlatos_has_carta(int id);  
+	public Platos_has_carta getPlatos_has_cartaById(Platos_has_cartaId id);
+	public void removePlatos_has_carta(Platos_has_cartaId  id);  
 }

@@ -5,6 +5,7 @@
  */
 package spring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -39,9 +40,10 @@ public class Reservas implements Serializable {
     
 
     @Column(name="fechaHora")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHora;
     
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="clientes_idclientes")
     private Clientes cliente;

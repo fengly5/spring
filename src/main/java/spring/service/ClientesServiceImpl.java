@@ -8,6 +8,7 @@ package spring.service;
 import spring.DAO.ClientesDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.model.Clientes;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author jcpm0
  */
+@Service
 public class ClientesServiceImpl implements ClientesService {
     
     @Autowired    
@@ -52,4 +54,10 @@ public class ClientesServiceImpl implements ClientesService {
     public void removeClientes(int id) {
         this.cliente.removeClientes(id);
     }
+
+  @Override
+  @Transactional
+  public Clientes findClienteByEmail(String email) {
+    return this.cliente.findClienteByEmail(email);
+  }
 }

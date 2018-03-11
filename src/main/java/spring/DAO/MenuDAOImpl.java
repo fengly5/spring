@@ -6,11 +6,15 @@
 package spring.DAO;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
+import org.hibernate.HibernateException;
+
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import spring.model.Menu;
@@ -59,7 +63,7 @@ public class MenuDAOImpl implements MenuDao {
     public List<Menu> listMenus() {
        @SuppressWarnings("unchecked") 
        TypedQuery<Menu> query =sessionFactory.getCurrentSession()
-               .createQuery("from Menu");
+               .createQuery("from Menu order by fecha desc");
        return query.getResultList();
     }
     /**
@@ -85,5 +89,28 @@ public class MenuDAOImpl implements MenuDao {
            sesion.remove(c);
        }
     }
+
+  @Override
+  public List<Menu> listMenus(Integer offset, Integer maxResults) {
+          String hql1="from Menu order by fecha desc";
+              List<Menu> result= new ArrayList<>();
+      try {
+        Session session = sessionFactory.getCurrentSession();
+       
+      
+        Query query;
+        query= session.createQuery(hql1);
+        
+        query.setFirstResult(offset!=null?offset:0);
+        query.setMaxResults(maxResults!=null?maxResults:10);
+        
+        result = query.list();
+        
+
+          } catch (HibernateException e) {
+              e.printStackTrace();
+          }
+        return result;
+  }
 }
  

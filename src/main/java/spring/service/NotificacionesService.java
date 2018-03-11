@@ -18,4 +18,5 @@ public interface NotificacionesService {
 	public List<Notificaciones> listNotificaciones();
 	public Notificaciones getNotificacionesById(int id);
 	public void removeNotificaciones(int id);
+        public List<Notificaciones> listNotificaciones(Integer offset,Integer maxResults);
 }

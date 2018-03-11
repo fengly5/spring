@@ -5,9 +5,11 @@
  */
 package spring.service;
 
+import java.util.ArrayList;
 import spring.DAO.Menu_has_platosDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.model.Menu_has_platos;
 import org.springframework.transaction.annotation.Transactional;
 import spring.model.Menu_has_platosId;
@@ -16,6 +18,7 @@ import spring.model.Menu_has_platosId;
  *
  * @author jcpm0
  */
+@Service
 public class Menu_has_platosServiceImpl implements Menu_has_platosSerice{
        
     @Autowired
@@ -52,5 +55,19 @@ public class Menu_has_platosServiceImpl implements Menu_has_platosSerice{
     @Transactional
     public void removeMenu_has_platos(Menu_has_platosId id) {
         this.menu_has_plato.removeMenu_has_platos(id);
+    }
+      @Override
+    @Transactional
+    public List<Menu_has_platos> listMenus_has_platos(int id) {
+      
+      List<Menu_has_platos> lst = this.menu_has_plato.listMenu_has_platos();
+      List<Menu_has_platos> result= new ArrayList<>();
+      for (Menu_has_platos mhp:lst){
+        if(mhp.getMenu().getIdmenu() == id){
+          result.add(mhp);
+        }
+      }
+      
+      return result;
     }
 }

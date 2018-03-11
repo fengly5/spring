@@ -18,4 +18,5 @@ public interface MenuDao {
 	public List<Menu> listMenus();
 	public Menu getMenuById(int id);
 	public void removeMenu(int id);  
+        public List<Menu> listMenus(Integer offset, Integer maxResults);
 }

@@ -6,8 +6,10 @@
 package spring.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,32 +36,45 @@ public class Notificaciones implements Serializable {
     @Column(name="idnotificaciones")
     private int idnotificaciones;
     
-    @Column
+    @Column(name="mensaje")
     private String mensaje;
     
-    @Column
+    @Column(name="fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
     
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},mappedBy="notificacion")
-    private Set<Dispositivos> dispositivo=new HashSet();
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy="notificacion")
+    private List<Dispositivos> dispositivo=new ArrayList<>();
 
     @OneToMany(mappedBy="notificacion", cascade=CascadeType.ALL)
-    private Set<Notif_sistema> notif_sistema;
+    private Set<Notif_sistema> notif_sistema=new HashSet<>();
+    
+    @Column(name="entregada")
+    private int entregada;
     
     public Notificaciones() {
     }
 
-    public Notificaciones(String mensaje, Date fecha) {
-        this.mensaje = mensaje;
-        this.fecha = fecha;
-    }
+  public Notificaciones(String mensaje, Date fecha, Set<Notif_sistema> notif_sistema, int entregada) {
+    this.mensaje = mensaje;
+    this.fecha = fecha;
+    this.notif_sistema = notif_sistema;
+    this.entregada = entregada;
+  }
 
-    public Notificaciones(String mensaje, Date fecha, Set<Notif_sistema> notif_sistema) {
-        this.mensaje = mensaje;
-        this.fecha = fecha;
-        this.notif_sistema = notif_sistema;
-    }
+//  @Override
+//  public String toString() {
+//    return "Notificaciones{" + "idnotificaciones=" + idnotificaciones + ", mensaje=" + mensaje + ", fecha=" + fecha + ", dispositivo=" + dispositivo + ", notif_sistema=" + notif_sistema + ", entregada=" + entregada + '}';
+//  }
+
+
+  public int getEntregada() {
+    return entregada;
+  }
+
+  public void setEntregada(int entregada) {
+    this.entregada = entregada;
+  }
 
     public int getIdnotificaciones() {
         return idnotificaciones;
@@ -85,14 +100,15 @@ public class Notificaciones implements Serializable {
         this.fecha = fecha;
     }
 
-    public Set<Dispositivos> getDispositivo() {
-        return dispositivo;
-    }
+  public List<Dispositivos> getDispositivo() {
+    return dispositivo;
+  }
 
-    public void setDispositivo(Set<Dispositivos> dispositivo) {
-        this.dispositivo = dispositivo;
-    }
+  public void setDispositivo(List<Dispositivos> dispositivo) {
+    this.dispositivo = dispositivo;
+  }
 
+ 
     public Set<Notif_sistema> getNotif_sistema() {
         return notif_sistema;
     }

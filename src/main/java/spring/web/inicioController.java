@@ -45,6 +45,10 @@ private static final Logger LOG =
                LOG.info("entra en handledrequest");
         ModelAndView mv = new ModelAndView();
         mv.setViewName("/inicio");
+        List<Reservas> lst=reservasService.listReservas();
+        for (Reservas r:lst){
+          LOG.info(r.toString());
+        }
         mv.addObject("reservas", reservasService.listReservas());
         return mv;
     }

@@ -6,7 +6,9 @@
 package spring.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,7 +44,15 @@ public class Dispositivos implements Serializable{
     
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name="dispositivos_has_notificaciones",joinColumns = {@JoinColumn(name="dispositivos_iddispositivos")},inverseJoinColumns = {@JoinColumn(name="notificaciones_idnotificaciones")})
-    private Set<Notificaciones> notificacion=new HashSet();
+    private List<Notificaciones> notificacion=new ArrayList<>();
+
+  public List<Notificaciones> getNotificacion() {
+    return notificacion;
+  }
+
+  public void setNotificacion(List<Notificaciones> notificacion) {
+    this.notificacion = notificacion;
+  }
     
     
     public Dispositivos() {

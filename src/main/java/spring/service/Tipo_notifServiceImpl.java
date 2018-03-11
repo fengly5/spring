@@ -8,6 +8,7 @@ package spring.service;
 import spring.DAO.Tipo_notifDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.model.Tipo_notif;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author jcpm0
  */
+@Service
 public class Tipo_notifServiceImpl implements Tipo_notifService {
         
     @Autowired

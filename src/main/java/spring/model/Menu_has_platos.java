@@ -5,6 +5,7 @@
  */
 package spring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
@@ -31,7 +32,7 @@ public class Menu_has_platos implements Serializable {
    
     private Menu_has_platosId primaryKey = new Menu_has_platosId();
     private String tipo;
-    
+    @JsonIgnore
     @EmbeddedId
     public Menu_has_platosId getPrimaryKey(){
         return primaryKey;

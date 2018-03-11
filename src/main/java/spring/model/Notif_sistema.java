@@ -38,7 +38,8 @@ public class Notif_sistema implements Serializable{
     @JoinColumn(name="notificaciones_idnotificaciones")
     private Notificaciones notificacion;
     
-    @OneToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="tipo_notif_idtipo_notif")
     private Tipo_notif tipo_notif;
 
     public Notif_sistema() {
@@ -48,6 +49,14 @@ public class Notif_sistema implements Serializable{
         this.notificacion = notificacion;
         this.tipo_notif = tipos;
     }
+
+  public Tipo_notif getTipo_notif() {
+    return tipo_notif;
+  }
+
+  public void setTipo_notif(Tipo_notif tipo_notif) {
+    this.tipo_notif = tipo_notif;
+  }
 
 
 
@@ -76,6 +85,11 @@ public class Notif_sistema implements Serializable{
     public void setNotificacion(Notificaciones notificacion) {
         this.notificacion = notificacion;
     }
+
+  @Override
+  public String toString() {
+    return "Notif_sistema{" + "idnotif_sistema=" + idnotif_sistema + ", notificacion=" + notificacion + ", tipo_notif=" + tipo_notif + '}';
+  }
 
 
     

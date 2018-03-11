@@ -16,6 +16,7 @@ public interface ReservasService {
             public void addReservas(Reservas c);
 	public void updateReservas(Reservas c);
 	public List<Reservas> listReservas();
+        public List<Reservas> listReservas(int id);
 	public Reservas getReservasById(int id);
 	public void removeReservas(int id);
 }

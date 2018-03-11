@@ -8,6 +8,7 @@ package spring.service;
 import spring.DAO.NotificacionesDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.model.Notificaciones;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author jcpm0
  */
+@Service
 public class NotificacionesServiceImpl implements NotificacionesService{
        
     
@@ -53,4 +55,9 @@ public class NotificacionesServiceImpl implements NotificacionesService{
     public void removeNotificaciones(int id) {
         this.notificacion.removeNotificaciones(id);
     } 
+
+  @Override
+  public List<Notificaciones> listNotificaciones(Integer offset, Integer maxResults) {
+    return this.notificacion.listNotificaciones(offset, maxResults);
+  }
 }

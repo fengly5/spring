@@ -5,6 +5,7 @@
  */
 package spring.service;
 
+import java.util.ArrayList;
 import spring.DAO.ReservasDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,4 +54,16 @@ public class ReservasServiceImpl implements ReservasService{
     public void removeReservas(int id) {
         this.reserva.removeReservas(id);
     }
+
+  @Override
+  @Transactional
+  public List<Reservas> listReservas(int id) {
+    List<Reservas> lst = this.reserva.listReservas();
+    List<Reservas> result = new ArrayList<>();
+    
+    lst.stream().filter((r) -> (r.getCliente().getIdclientes() == (long) id)).forEachOrdered((r) -> {
+      result.add(r);
+      });
+    return result;
+  }
 }

@@ -5,16 +5,22 @@
  */
 package spring.service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import spring.DAO.PlatosDao;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.model.Platos;
 import org.springframework.transaction.annotation.Transactional;
+import spring.model.Tipo_plato;
 
 /**
  *
  * @author jcpm0
  */
+@Service
 public class PlatosServiceImpl implements PlatosService {
         
     @Autowired
@@ -52,4 +58,20 @@ public class PlatosServiceImpl implements PlatosService {
     public void removePlatos(int id) {
         this.plato.removePlatos(id);
     }
+
+  @Transactional
+    @Override
+  public List<Platos> listaPlatosCarta(Integer offset, Integer maxResults) {
+    return this.plato.listarPlatosCarta(offset, maxResults);
+  }
+  @Transactional
+    @Override
+    public List<Platos> listaPlatosCarta() {
+    return this.plato.listarPlatosCarta();
+  }
+
+  @Override
+  public List<Platos> listarPlatosMenu() {
+    return this.plato.listarPlatosMenu();
+  }
 }

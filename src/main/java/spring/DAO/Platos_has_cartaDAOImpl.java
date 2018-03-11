@@ -11,9 +11,11 @@ import javax.persistence.TypedQuery;
 import spring.model.Platos_has_carta;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import spring.model.Platos_has_carta;
+import spring.model.Platos_has_cartaId;
 
 /**
  *
@@ -22,8 +24,10 @@ import spring.model.Platos_has_carta;
 @Repository
 public class Platos_has_cartaDAOImpl implements Platos_has_cartaDao {
     
+       private static final Logger LOG = 
+          Logger.getLogger(Platos_has_cartaDAOImpl.class.getName()); 
    
-   
+    @Autowired
     private SessionFactory sessionFactory;
     /**
      * Método para añadir un nuevo registro
@@ -50,9 +54,10 @@ public class Platos_has_cartaDAOImpl implements Platos_has_cartaDao {
      */
     @Override
     public List<Platos_has_carta> listPlatos_has_cartas() {
-       @SuppressWarnings("unchecked") 
-       TypedQuery<Platos_has_carta> query =
-        sessionFactory.getCurrentSession().createQuery("from platos_has_carta");
+   LOG.info("entra en listplatos_has_cartas");
+      @SuppressWarnings("unchecked") 
+       TypedQuery<Platos_has_carta> query;
+      query = sessionFactory.getCurrentSession().createQuery("from Platos_has_carta");
        return query.getResultList();
     }
     /**
@@ -61,7 +66,7 @@ public class Platos_has_cartaDAOImpl implements Platos_has_cartaDao {
      * @return Devuelve un objeto Platos_has_carta.
      */
     @Override
-    public Platos_has_carta getPlatos_has_cartaById(int id) {
+    public Platos_has_carta getPlatos_has_cartaById(Platos_has_cartaId  id) {
             
        return sessionFactory.getCurrentSession().load(Platos_has_carta.class, id);
     }
@@ -70,7 +75,7 @@ public class Platos_has_cartaDAOImpl implements Platos_has_cartaDao {
      * @param id Recibe un entero con el id del registro a borrar
      */
     @Override
-    public void removePlatos_has_carta(int id) {
+    public void removePlatos_has_carta(Platos_has_cartaId  id) {
        
        Session sesion =sessionFactory.getCurrentSession();
        Platos_has_carta c = sesion.load(Platos_has_carta.class, id);

@@ -6,6 +6,7 @@
 package spring.service;
 
 import java.util.List;
+import spring.model.Clientes;
 import spring.model.Dispositivos;
 
 /**
@@ -18,4 +19,7 @@ public interface DispositivosService {
 	public List<Dispositivos> listDispositivos();
 	public Dispositivos getDispositivosById(int id);
 	public void removeDispositivos(int id); 
+        public List<Dispositivos> listaDispositivosCliente(int idCliente);
+        public List<Clientes> clientesDispositivoNotificado ();
+        
 }

@@ -13,6 +13,7 @@ import org.hibernate.HibernateException;
 import spring.model.Notificaciones;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +57,7 @@ public class NotificacionesDAOImpl implements NotificacionesDao {
     public List<Notificaciones> listNotificaciones() {
        @SuppressWarnings("unchecked") 
        TypedQuery<Notificaciones> query =
-         sessionFactory.getCurrentSession().createQuery("from Notificaciones");
+         sessionFactory.getCurrentSession().createQuery("from Notificaciones order by fecha asc");
        return query.getResultList();
     }
     /**
@@ -92,4 +93,27 @@ public class NotificacionesDAOImpl implements NotificacionesDao {
           sesion.flush();
        }
     }
+    @Override
+    public List<Notificaciones> listNotificaciones(Integer offset,Integer maxResults){
+         String hql1="from Notificaciones order by fecha desc";
+              List<Notificaciones> result= new ArrayList<Notificaciones>();
+      try {
+        Session session = sessionFactory.getCurrentSession();
+       
+      
+        Query query;
+        query= session.createQuery(hql1);
+        
+        query.setFirstResult(offset!=null?offset:0);
+        query.setMaxResults(maxResults!=null?maxResults:10);
+        
+        result = query.list();
+        
+
+          } catch (HibernateException e) {
+              e.printStackTrace();
+          }
+        return result;
+    }
+
 }

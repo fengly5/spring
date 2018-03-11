@@ -6,6 +6,7 @@
 package spring.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
@@ -37,6 +38,35 @@ public class Menu_has_platosId implements Serializable {
     public void setPlato(Platos plato) {
         this.plato = plato;
     }
+
+  @Override
+  public int hashCode() {
+    int hash = 7;
+    hash = 41 * hash + Objects.hashCode(this.menu);
+    hash = 41 * hash + Objects.hashCode(this.plato);
+    return hash;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Menu_has_platosId other = (Menu_has_platosId) obj;
+    if (!Objects.equals(this.menu, other.menu)) {
+      return false;
+    }
+    if (!Objects.equals(this.plato, other.plato)) {
+      return false;
+    }
+    return true;
+  }
     
     
     

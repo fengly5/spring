@@ -6,6 +6,7 @@
 package spring.DAO;
 
 import java.util.List;
+import spring.model.Clientes;
 import spring.model.Dispositivos;
 
 /**
@@ -18,4 +19,5 @@ public interface DispositivosDao {
 	public List<Dispositivos> listDispositivos();
 	public Dispositivos getDispositivosById(int id);
 	public void removeDispositivos(int id);  
+        public List<Clientes> clientesDispositivoNotificado ();
 }

@@ -5,6 +5,7 @@
  */
 package spring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -46,22 +47,24 @@ public class Platos implements Serializable {
     @Column(name="precioRacion")
     private double precioRacion;
     
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="empleados_idempleados")
     private Empleados empleados;
    
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name="platos_has_tipo_plato",
             joinColumns = {@JoinColumn(name="platos_idPlato")},
             inverseJoinColumns = {@JoinColumn(name="tipo_plato_idTipo")})
     private Set<Tipo_plato> tipo_plato=new HashSet();
-        
+     @JsonIgnore   
     @OneToMany(mappedBy="primaryKey.plato",cascade=CascadeType.ALL)
     private Set<Platos_has_carta> platos_has_carta = 
             new HashSet<Platos_has_carta>();
-    
+    @JsonIgnore
     @OneToMany(mappedBy="primaryKey.plato",
-            cascade=CascadeType.ALL)
+            cascade=CascadeType.MERGE)
     private Set<Menu_has_platos> menu_has_platos =
             new HashSet<Menu_has_platos>();
 
@@ -116,7 +119,7 @@ public class Platos implements Serializable {
     public void setPrecioRacion(double precioRacion) {
         this.precioRacion = precioRacion;
     }
-
+  
     public Empleados getEmpleado() {
         return empleados;
     }

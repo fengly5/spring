@@ -5,16 +5,20 @@
  */
 package spring.service;
 
+import java.util.ArrayList;
 import spring.DAO.DispositivosDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.model.Dispositivos;
 import org.springframework.transaction.annotation.Transactional;
+import spring.model.Clientes;
 
 /**
  *
  * @author jcpm0
  */
+@Service
 public class DispositivosServiceImpl implements DispositivosService {
     
     @Autowired    
@@ -52,4 +56,21 @@ public class DispositivosServiceImpl implements DispositivosService {
     public void removeDispositivos(int id) {
         this.dispositivo.removeDispositivos(id);
     }
+    @Override
+    @Transactional
+    public List<Dispositivos> listaDispositivosCliente(int idCliente){
+      List<Dispositivos> lst = this.listDispositivos();
+      List<Dispositivos> dClientes = new ArrayList<>();
+      for (Dispositivos d:lst){
+        if(d.getCliente().getIdclientes() == idCliente){
+          dClientes.add(d);
+        }
+      }
+      return dClientes;
+    }
+
+  @Override
+  public List<Clientes> clientesDispositivoNotificado() {
+    return this.dispositivo.clientesDispositivoNotificado();
+  }
 }

@@ -18,4 +18,5 @@ public interface ClientesService {
 	public List<Clientes> listClientes();
 	public Clientes getClientesById(int id);
 	public void removeClientes(int id);
+        public Clientes findClienteByEmail (String email);
 }

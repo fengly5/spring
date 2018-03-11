@@ -5,6 +5,7 @@
  */
 package spring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
@@ -14,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import org.jboss.logging.Logger;
 
 /**
  *
@@ -27,34 +29,42 @@ import javax.persistence.Transient;
     @AssociationOverride(name = "primaryKey.plato",
         joinColumns = @JoinColumn(name = "platos_idPlato ")) })
 public class Platos_has_carta implements Serializable {
-    
+       private static final Logger LOG = 
+          Logger.getLogger(Platos_has_carta.class.getName()); 
  
     
-   
+   @JsonIgnore
     private Platos_has_cartaId primaryKey = new Platos_has_cartaId();
-       private int aparece;
+    
+    private int aparece;
 
      @EmbeddedId
     public Platos_has_cartaId getPrimaryKey(){
+//      LOG.info("PHC: getPrimaryKey");
         return primaryKey;
     }
-    
+   
     public void setPrimaryKey(Platos_has_cartaId primaryKey){
-        this.primaryKey=primaryKey;
+//      LOG.info("PHC: setPrimaryKey");
+      this.primaryKey=primaryKey;
     }
     @Transient
     public Platos getPlato(){
+//        LOG.info("PHC: getPlato");
         return getPrimaryKey().getPlato();
     }
     public void setPlato(Platos plato){
+//      LOG.info("PHC: setPlato");
         getPrimaryKey().setPlato(plato);
     }
     @Transient 
     public Carta getCarta(){
+//      LOG.info("PHC: getCarta");
         return getPrimaryKey().getCarta();
     }
     
     public void setCarta(Carta carta){
+//      LOG.info("PHC: setCarta");
         getPrimaryKey().setCarta(carta);
     }
 

@@ -8,6 +8,7 @@ package spring.service;
 import spring.DAO.MenuDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.model.Menu;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author jcpm0
  */
+@Service
 public class MenuServiceImpl implements MenuService {
     
     @Autowired 
@@ -52,4 +54,10 @@ public class MenuServiceImpl implements MenuService {
     public void removeMenu(int id) {
         this.menu.removeMenu(id);
     }  
+
+  @Override
+  @Transactional
+  public List<Menu> listMenus(Integer offset, Integer maxResults) {
+    return this.menu.listMenus(offset, maxResults);
+  }
 }

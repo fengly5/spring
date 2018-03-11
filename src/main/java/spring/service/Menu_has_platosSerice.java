@@ -19,4 +19,5 @@ public interface Menu_has_platosSerice {
 	public List<Menu_has_platos> listMenu_has_platos();
 	public Menu_has_platos getMenu_has_platosById(Menu_has_platosId id);
 	public void removeMenu_has_platos(Menu_has_platosId id);
+        public List<Menu_has_platos> listMenus_has_platos(int id);
 }

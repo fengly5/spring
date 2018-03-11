@@ -5,6 +5,7 @@
  */
 package spring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -19,9 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -45,8 +45,9 @@ public class Empleados implements Serializable{
     private String rol;
     @ManyToOne
     @JoinColumn(name="usuarios_idusuarios")
+    @JsonIgnore
     private Usuarios usuarios;
-    
+    @JsonIgnore
     @OneToMany(mappedBy="empleados",cascade = { CascadeType.MERGE,CascadeType.PERSIST})
     private Set<Platos> platos;
     
@@ -60,7 +61,7 @@ public class Empleados implements Serializable{
         this.usuarios = usuario;
         this.platos = platos;
     }
-
+   
     public Set<Platos> getPlatos() {
         return platos;
     }

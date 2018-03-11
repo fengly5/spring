@@ -5,6 +5,7 @@
  */
 package spring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,12 +32,12 @@ public class Carta implements Serializable{
     
     @Column(name="noombre")
     private String noombre;
-    
-    @OneToMany(mappedBy="primaryKey.carta",cascade={CascadeType.MERGE, CascadeType.PERSIST})
-    private Set<Platos_has_carta> platos_has_carta;
+    @JsonIgnore
+ @OneToMany(mappedBy="primaryKey.carta",cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    private Set<Platos_has_carta> platos_has_carta= new HashSet<Platos_has_carta>();
 
     public Carta() {
-        this.platos_has_carta = new HashSet<>();
+        
     }
 
   public Carta(String noombre, Set<Platos_has_carta> platos_has_carta) {
@@ -65,7 +66,7 @@ public class Carta implements Serializable{
   public void setNoombre(String noombre) {
     this.noombre = noombre;
   }
-
+ 
   public Set<Platos_has_carta> getPlatos_has_carta() {
     return platos_has_carta;
   }

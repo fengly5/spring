@@ -9,6 +9,7 @@ package spring.service;
 import spring.DAO.Notif_sistemaDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import spring.model.Notif_sistema;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author jcpm0
  */
+@Service
 public class Notif_sistemaServiceImpl implements Notif_sistemaService{
        
     

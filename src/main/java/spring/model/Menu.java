@@ -5,6 +5,7 @@
  */
 package spring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -37,8 +38,9 @@ public class Menu implements Serializable{
     @Temporal(TemporalType.DATE)
     private Date fecha;
     
+    @JsonIgnore
     @OneToMany(mappedBy="primaryKey.menu",
-            cascade=CascadeType.ALL)
+            cascade=CascadeType.MERGE)
     private Set<Menu_has_platos> menu_has_platos = new HashSet<Menu_has_platos>();
 
     public Menu() {

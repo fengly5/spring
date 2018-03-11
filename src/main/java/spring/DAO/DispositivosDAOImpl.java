@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import spring.model.Clientes;
 import spring.model.Dispositivos;
 
 /**
@@ -77,5 +78,13 @@ public class DispositivosDAOImpl implements DispositivosDao {
        if(c != null){
            sesion.remove(c);
        }
+    }
+    
+    public List<Clientes> clientesDispositivoNotificado (){
+             @SuppressWarnings("unchecked") 
+       TypedQuery<Clientes> query =
+            sessionFactory.getCurrentSession()
+       .createQuery("select distinct d.cliente from Dispositivos d where d.notificacion is not empty");
+       return query.getResultList();
     }
 }

@@ -6,6 +6,7 @@
 package spring.DAO;
 
 import java.util.List;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -76,4 +77,26 @@ public class ClientesDAOImpl implements ClientesDao {
            sesion.remove(c);
        }
     }
+    
+    
+    @Override
+    public Clientes findClienteByEmail (String email){
+      @SuppressWarnings("unchecked")
+      TypedQuery<Clientes> query;
+     
+              
+       query =sessionFactory.
+               getCurrentSession().createQuery("from Clientes c  where c.email = "+email);
+      List<Clientes> lst=query.getResultList();
+      if(  lst == null || lst.isEmpty()){
+        return null;
+      }else
+      {
+        return lst.get(0);
+      }
+        
+      
+      
+    }
+ 
 }

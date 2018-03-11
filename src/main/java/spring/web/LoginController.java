@@ -24,11 +24,17 @@ import org.springframework.ui.Model;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import spring.service.EmpleadosService;
+import spring.validacion.validaEmpleado;
 
 
 
@@ -43,7 +49,8 @@ public class LoginController  {
     
     @Autowired
     public EmpleadosService empleadoService;
-
+    
+//    private validaEmpleado validator;
     
     @RequestMapping(value="/", method=RequestMethod.GET)
     public ModelAndView handleRequest(HttpServletRequest hsr, 
@@ -56,8 +63,10 @@ public class LoginController  {
         return mv;
     }
     @RequestMapping(value="/login",method=RequestMethod.POST)    
-    public String doLogin(@Valid Empleados emp,Model model,BindingResult errors,HttpSession session){
+    public String doLogin( 
+     @Valid Empleados emp,Model model,BindingResult errors,HttpSession session){
       
+//        validator.validate(emp, errors);
         LOG.info("emp: "+emp.getLogin());
         LOG.info("errors: "+errors.toString());
         if (errors.hasErrors()){

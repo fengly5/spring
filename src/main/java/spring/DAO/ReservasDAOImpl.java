@@ -62,7 +62,7 @@ public class ReservasDAOImpl implements ReservasDao {
     public List<Reservas> listReservas() {
        @SuppressWarnings("unchecked") 
        TypedQuery<Reservas> query;
-      query = sessionFactory.getCurrentSession().createQuery("from Reservas");
+      query = sessionFactory.getCurrentSession().createQuery("from Reservas order by fechaHora desc");
        return query.getResultList();
        
     }

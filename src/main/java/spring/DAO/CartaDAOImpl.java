@@ -6,11 +6,14 @@
 package spring.DAO;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.TypedQuery;
+import org.hibernate.HibernateException;
 import spring.model.Carta;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +24,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CartaDAOImpl implements CartaDao {
     
-   
+
     @Autowired
     private SessionFactory sessionFactory;
    
@@ -54,6 +57,7 @@ public class CartaDAOImpl implements CartaDao {
     @Override
     public List<Carta> listCartas() {
        @SuppressWarnings("unchecked") 
+          
        TypedQuery<Carta> query =sessionFactory.getCurrentSession().createQuery("from Carta");
        return query.getResultList();
     }
@@ -80,5 +84,28 @@ public class CartaDAOImpl implements CartaDao {
            sesion.remove(c);
        }
     }
-    
+      @Override
+  public List<Carta> listCartas(Integer offset, Integer maxResults) {
+   
+     
+      String hql1="from Carta";
+              List<Carta> result= new ArrayList<Carta>();
+      try {
+        Session session = sessionFactory.getCurrentSession();
+       
+      
+        Query query;
+        query= session.createQuery(hql1);
+        
+        query.setFirstResult(offset!=null?offset:0);
+        query.setMaxResults(maxResults!=null?maxResults:10);
+        
+        result = query.list();
+        
+
+          } catch (HibernateException e) {
+              e.printStackTrace();
+          }
+        return result;
+  } 
 }

@@ -6,7 +6,9 @@
 package spring.service;
 
 import java.util.List;
+import java.util.Map;
 import spring.model.Platos_has_carta;
+import spring.model.Platos_has_cartaId;
 
 /**
  *
@@ -15,7 +17,8 @@ import spring.model.Platos_has_carta;
 public interface Platos_has_cartaService {
             public void addPlatos_has_carta(Platos_has_carta c);
 	public void updatePlatos_has_carta(Platos_has_carta c);
-	public List<Platos_has_carta> listPlatos_has_cartas();
-	public Platos_has_carta getPlatos_has_cartaById(int id);
-	public void removePlatos_has_carta(int id);
+	public List<Platos_has_carta> listPlatos_has_cartas(int id);
+	public Platos_has_carta getPlatos_has_cartaById(Platos_has_cartaId  id);
+	public void removePlatos_has_carta(Platos_has_cartaId  id);
+        public Map<String,Object> convierteMap(List<Platos_has_carta> lista);
 }

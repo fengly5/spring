@@ -5,6 +5,7 @@
  */
 package spring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -37,10 +38,10 @@ public class Usuarios implements Serializable {
     private String apellido2;
     @Column(name="fechanacimiento")
     private String fechanacimiento;
-    
+    @JsonIgnore
     @OneToMany(mappedBy="usuarios",cascade=CascadeType.ALL)
     private Set<Empleados> empleados;
-    
+     @JsonIgnore
     @OneToMany(mappedBy="usuarios",cascade=CascadeType.ALL)
     private Set<Clientes> clientes;
     

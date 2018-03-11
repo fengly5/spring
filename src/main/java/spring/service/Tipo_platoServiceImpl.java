@@ -8,6 +8,8 @@ package spring.service;
 import spring.DAO.Tipo_platoDao;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import spring.model.Tipo_plato;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author jcpm0
  */
+@Service
 public class Tipo_platoServiceImpl implements Tipo_platoService {
        
     @Autowired

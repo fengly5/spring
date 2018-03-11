@@ -18,4 +18,7 @@ public interface PlatosService {
 	public List<Platos> listPlatos();
 	public Platos getPlatosById(int id);
 	public void removePlatos(int id);  
+        public List<Platos> listaPlatosCarta();
+        public List<Platos>listaPlatosCarta(Integer offset,Integer maxResults);
+        public List<Platos> listarPlatosMenu();
 }

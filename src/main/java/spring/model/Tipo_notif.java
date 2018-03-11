@@ -6,6 +6,7 @@
 package spring.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,18 +37,25 @@ public class Tipo_notif implements Serializable {
     @Column(name="tipo")
     private String tipo;
     
-//    @OneToOne(cascade={CascadeType.MERGE,CascadeType.PERSIST})
-//    @PrimaryKeyJoinColumn
-//    private Notif_sistema notif_sistema;
+    @OneToMany(mappedBy = "tipo_notif",cascade={CascadeType.MERGE,CascadeType.PERSIST})
+    private Set<Notif_sistema> notif_sistema = new HashSet<Notif_sistema>();
 
     public Tipo_notif() {
     }
 
+  public Tipo_notif(String tipo) {
+    this.tipo = tipo;
+  }
+
+  public Set<Notif_sistema> getNotif_sistema() {
+    return notif_sistema;
+  }
+
+  public void setNotif_sistema(Set<Notif_sistema> notif_sistema) {
+    this.notif_sistema = notif_sistema;
+  }
+
     
-    public Tipo_notif(String tipo, Notif_sistema notif_sistema) {
-        this.tipo = tipo;
-//        this.notif_sistema = notif_sistema;
-    }
 
     public int getIdtipo_notif() {
         return idtipo_notif;
@@ -65,13 +73,10 @@ public class Tipo_notif implements Serializable {
         this.tipo = tipo;
     }
 
-//    public Notif_sistema getNotif_sistema() {
-//        return notif_sistema;
-//    }
-//
-//    public void setNotif_sistema(Notif_sistema notif_sistema) {
-//        this.notif_sistema = notif_sistema;
-//    }
-//    
-    
+  @Override
+  public String toString() {
+    return "Tipo_notif{" + "idtipo_notif=" + idtipo_notif + ", tipo=" + tipo + ", notif_sistema=" + notif_sistema + '}';
+  }
+
 }
+

@@ -11,26 +11,25 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.validation.Validator;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import spring.validacion.StringDateConverter;
 
 /**
  *
@@ -42,8 +41,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableTransactionManagement
 @ComponentScan("spring")  
 public class WebConfig implements WebMvcConfigurer {
-   @Autowired
-   private Environment env;
+
    
    @Bean
    public ViewResolver viewResolver(){
@@ -54,29 +52,44 @@ public class WebConfig implements WebMvcConfigurer {
         resolver.setExposeContextBeansAsAttributes(true);
         return resolver;
     }
-       @Bean
-   public MessageSource messageSource() {
-      ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-      source.setBasename("messages");
-      return source;
-   }
-// 
+//       @Bean
+//   public MessageSource messageSource() {
+//      ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+//      source.setBasename("messages");
+//      return source;
+//   }
+////@Bean
+////public LocalValidatorFactoryBean validator(){
+////return new LocalValidatorFactoryBean();
+////}
 //   @Override
 //   public Validator getValidator() {
 //      LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
 //      validator.setValidationMessageSource(messageSource());
 //      return validator;
 //   }
-
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/css/**")
+            .addResourceLocations("/resources/css")
+            .setCachePeriod(31556926);
+        registry.addResourceHandler("/js/**")
+            .addResourceLocations("/resources/js")
+            .setCachePeriod(31556926);
+    }
     @Override
     public void configureDefaultServletHandling(
             DefaultServletHandlerConfigurer configurer){
         configurer.enable();
     }
-    
-
-
-   @Bean
+    @Override
+    public void addFormatters(FormatterRegistry registry){
+      registry.addConverter(new  StringDateConverter());
+    }
+    @Autowired
+   private Environment env;
+     
+       @Bean
    public DataSource getDataSource() {
       BasicDataSource dataSource = new BasicDataSource();
       dataSource.setDriverClassName(env.getProperty("db.driver"));
@@ -94,8 +107,8 @@ public class WebConfig implements WebMvcConfigurer {
       Properties props=new Properties();
       props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
       props.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-//      props.put("hibernate.current_session_context_class", 
-//              env.getProperty("hibernate.current_session_context_class"));
+      props.put("hibernate.enable_lazy_load_no_trans", 
+              env.getProperty("hibernate.enable_lazy_load_no_trans"));
       sessionFactory.setHibernateProperties(props);
       sessionFactory.setPackagesToScan("spring.model");
       return sessionFactory;
@@ -108,5 +121,6 @@ public class WebConfig implements WebMvcConfigurer {
       transactionManager.setSessionFactory(sessionFactory().getObject());
       return transactionManager;
    }
+
 
 }
